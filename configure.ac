@@ -1,7 +1,7 @@
 AC_PREREQ([2.69])
 AC_INIT([pam-enumgroups], [1.0.0], [https://github.com/hpvb/pam-enumgroups/issues])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR([pam-enumgroups.c])
+AC_CONFIG_SRCDIR([pam_enumgroups.c])
 
 AC_PROG_CC
 
