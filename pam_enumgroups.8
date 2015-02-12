@@ -1,0 +1,47 @@
+.TH "PAM_ENUMGROUPS" "8" "01/12/2015" "Linux-PAM Manual" "Linux-PAM Manual"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.nh
+.ad l
+.SH "NAME"
+pam_enumgroups \- Simple PAM module to work around a problem with external groups that can't be resolved by member
+.SH "SYNOPSIS"
+.HP \w'\fBpam_enumgroups\&.so\fR\ 'u
+\fBpam_enumgroups\&.so\fR
+.SH "DESCRIPTION"
+.PP
+The pam_enumgroups PAM module enumerates all groups using
+\fBgetgrent\fR(3),
+it checks what groups have a member of the named user and adds them to the sessions' group vector using
+\fBsetgroups\fR(2),
+\&. This is useful when group memberships are visible when querying a group directly but not when trying to resolve group membership of a user by querying on groupname\&. This can occur with NSS databases such as LDAP\&. It is generally better to not rely on this module but restructure the database or switch to sssd\&.
+.SH "EXAMPLE"
+.PP
+auth optional pam_enumgroups.so
+.SH "OPTIONS"
+.PP
+This module does not recognise any options\&.
+.SH "MODULE TYPES PROVIDED"
+.PP
+Only the
+\fBauth\fR
+module type is provided\&.
+.SH "RETURN VALUES"
+.PP
+PAM_SUCCESS
+.RS 4
+No errors occured trying to enumerate groups\&.
+.RE
+.PP
+PAM_USER_UNKNOWN
+.RS 4
+The user is not known to the system\&.
+.RE
+.SH "SEE ALSO"
+.PP
+\fBgetgrent\fR(3),
+\fBsetgroups\fR(2),
+\fBpam\fR(7)\&.
+.SH "AUTHORS"
+.PP
+pam_enumgroups was written by Hein-Pieter van Braam <hp@tmm\&.cx>\&.

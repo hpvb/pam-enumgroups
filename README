@@ -1,0 +1,19 @@
+Simple PAM module to work around a problem with external groups that can't be resolved by member
+
+The pam_enumgroups PAM module enumerates all groups using getgrent(3), it checks what groups have a member of the named user and adds them to the sessions' group vector using setgroups(2), . This is useful when group memberships are visible when querying a group directly but not when trying to resolve group membership of a user by querying on groupname. This can occur with NSS databases such as LDAP. It is generally better to not rely on this module but restructure the database or switch to sssd.
+
+EXAMPLE
+       auth optional pam_enumgroups.so
+
+OPTIONS
+       This module does not recognise any options.
+
+MODULE TYPES PROVIDED
+       Only the auth module type is provided.
+
+RETURN VALUES
+       PAM_SUCCESS
+           No errors occured trying to enumerate groups.
+
+       PAM_USER_UNKNOWN
+           The user is not known to the system.
