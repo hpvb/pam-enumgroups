@@ -32,6 +32,6 @@ rm -f $RPM_BUILD_ROOT/%{security_parent_dir}/security/*.a
 %files 
 %defattr(-,root,root,-)
 %{security_parent_dir}/security/*.so
-%doc README
 %{_mandir}/man8/*
+/usr/share/doc/pam-enumgroups/README
 
